@@ -115,7 +115,7 @@ a:hover {
 
 /* Reusable "card" block */
 .card {
-  background: #fff;
+  background: #000000 ;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
