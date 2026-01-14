@@ -1,0 +1,302 @@
+/* -------------------------------------------------------
+   Keyrus-inspired simple theme (clean, bold, high-contrast)
+   Targets the provided section IDs.
+   ------------------------------------------------------- */
+
+:root {
+  /* Core palette */
+  --bg: #ffffff;
+  --text: #0b0f14;
+  --muted: #5c6670;
+
+  /* Keyrus-like accent (approximate "brand red") */
+  --accent: #e1002a;
+  --accent-hover: #c80025;
+
+  /* Surfaces + borders */
+  --surface: #f5f7fa;
+  --border: #e6eaf0;
+
+  /* Typography */
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --radius: 16px;
+  --max-width: 1120px;
+
+  /* Spacing */
+  --section-y: clamp(48px, 6vw, 96px);
+  --section-x: clamp(18px, 4vw, 32px);
+
+  /* Shadow */
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Helpful if you wrap content in a container inside each section */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--section-x);
+}
+
+/* Section base styling */
+section {
+  padding: var(--section-y) 0;
+}
+
+/* Alternating backgrounds for readability */
+#challenge,
+#how-it-works,
+#why-keyrus {
+  background: var(--surface);
+}
+
+/* Headings */
+h1, h2, h3 {
+  line-height: 1.15;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 750;
+}
+
+h2 {
+  font-size: clamp(26px, 2.6vw, 38px);
+  font-weight: 750;
+}
+
+h3 {
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 14px 0;
+  color: var(--text);
+}
+
+.lede,
+.section-intro {
+  font-size: clamp(16px, 1.25vw, 20px);
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Reusable "card" block */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 2.2vw, 28px);
+}
+
+/* Simple responsive grid utility */
+.grid {
+  display: grid;
+  gap: 18px;
+}
+@media (min-width: 900px) {
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Accent rule */
+.rule {
+  width: 72px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 999px;
+  margin: 18px 0 22px 0;
+}
+
+/* -------------------------------------------------------
+   SECTION-SPECIFIC TWEAKS
+   ------------------------------------------------------- */
+
+/* Introduction: strong hero feel */
+#introduction .kicker {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--muted);
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+
+#introduction .hero {
+  display: grid;
+  gap: 18px;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  #introduction .hero {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+  }
+}
+
+/* Challenge / Solution: make lists punchier */
+#challenge ul,
+#solution ul {
+  margin: 12px 0 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+#challenge li,
+#solution li {
+  margin: 8px 0;
+}
+
+/* How it works: numbered steps */
+.steps {
+  counter-reset: step;
+}
+.step {
+  position: relative;
+  padding-left: 52px;
+  margin-bottom: 24px;
+}
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+/* Who this is for: tags/pills */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Why Keyrus: highlight stats or proof points */
+.stat {
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+}
+.stat .value {
+  font-size: 28px;
+  font-weight: 800;
+}
+.stat .label {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* CTA: bold, centered block */
+#cta {
+  background: var(--text);
+  color: #fff;
+}
+#cta h2,
+#cta p {
+  color: #fff;
+}
+#cta .container {
+  text-align: center;
+}
+#cta .cta-box {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 34px);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+  user-select: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.7);
+  transform: translateY(-1px);
+}
+
+/* Focus states (accessibility) */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid rgba(225, 0, 42, 0.35);
+  outline-offset: 3px;
+}
