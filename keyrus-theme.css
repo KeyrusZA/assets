@@ -160,7 +160,6 @@ a:hover {
 }
 
 #introduction .hero {
-  display: grid;
   gap: 18px;
   align-items: start;
 }
